@@ -43,23 +43,6 @@ function error(type) {
 }
 
 /**
- * A generic `Array#map` utility function.
- * @private
- * @param {Array} array The array to iterate over.
- * @param {Function} callback The function that gets called for every array
- * item.
- * @returns {Array} A new array of values returned by the callback function.
- */
-function map(array, callback) {
-	const result = [];
-	let length = array.length;
-	while (length--) {
-		result[length] = callback(array[length]);
-	}
-	return result;
-}
-
-/**
  * A simple `Array#map`-like wrapper to work with domain name strings or email
  * addresses.
  * @private
@@ -81,7 +64,7 @@ function mapDomain(domain, callback) {
 	// Avoid `split(regex)` for IE8 compatibility. See #17.
 	domain = domain.replace(regexSeparators, '\x2E');
 	const labels = domain.split('.');
-	const encoded = map(labels, callback).join('.');
+	const encoded = labels.map(callback).join('.');
 	return result + encoded;
 }
 
